@@ -7,9 +7,6 @@ public class Employee{
 	private String adresse;
 	private int age;
 
-	/*
-	 * ctor
-	*/
 	public Employee() {
 	}
 
