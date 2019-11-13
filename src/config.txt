@@ -1,0 +1,2 @@
+com.fr.adaming.dao.impl.DaoImpl
+com.fr.adaming.metier.impl.MetierImplV2

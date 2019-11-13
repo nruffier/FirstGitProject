@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> <!-- bean definitions here -->
+
+<!-- 	<bean id="daoBean" class="com.fr.adaming.dao.impl.DaoImplV2"></bean> -->
+<!-- 	<bean id="metierBean" -->
+<!-- 		class="com.fr.adaming.metier.impl.MetierImplV2"> -->
+<!-- 		<property name="dao" ref="daoBean"></property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="metierBean2" -->
+<!-- 		class="com.fr.adaming.metier.impl.MetierImplV4"> -->
+<!-- 		<constructor-arg type="com.fr.adaming.dao.IDao" -->
+<!-- 			ref="daoBean"></constructor-arg> -->
+		<!-- ou bien : <constructor-arg name="dao" ref="daoBean"></constructor-arg> -->
+		<!-- Ou bien on peut utilsier un index pour differencier deux constructeur 
+			avec le meme type d'argument -->
+<!-- 	</bean>  -->
+	<bean id="groupeAdamingBean" class="com.fr.adaming.entity.Societe">
+		<property name="nom" value="Groupe Adaming"></property>
+		<property name="id" ref="idGroupeAdamingBean"></property>
+		
+		<!-- Exemple de list comme attribut : (avec list prérempli) -->
+		<property name="developpeurBackEnd">
+			<list value-type="com.fr.adaming.entity.Employee">
+			<!-- Injection par assesseur : -->
+				<bean class="com.fr.adaming.entity.Employee">
+					<property name="id" value="1"></property>
+					<property name="fullname" value="devBackend1"></property>
+				</bean>
+				<!-- Injection par constructeur -->
+				<bean class="com.fr.adaming.entity.Employee">
+					<constructor-arg name="id" value="2"></constructor-arg>
+					<constructor-arg name="fullname"
+						value="devBackend2"></constructor-arg>
+				</bean>
+				<!-- Référence à un autre bean -->
+				<ref bean="devBackend3Bean" />
+			</list>
+		</property>
+		<property name="developpeurFrontEnd">
+			<set value-type="com.fr.adaming.entity.Employee">
+				<bean class="com.fr.adaming.entity.Employee">
+					<property name="id" value="4"></property>
+					<property name="fullname" value="devFrontend1"></property>
+				</bean>
+				<bean class="com.fr.adaming.entity.Employee">
+					<constructor-arg name="id" value="5"></constructor-arg>
+					<constructor-arg name="fullname"
+						value="devFrontend2"></constructor-arg>
+				</bean>
+			</set>
+		</property>
+		<property name="testeurs">
+			<map key-type="java.lang.String" value-type="com.fr.adaming.entity.Employee">
+				<entry key="AdamingPark">
+					<bean class="com.fr.adaming.entity.Employee">
+						<property name="id" value="6"></property>
+						<property name="fullname" value="testeur1"></property>
+					</bean>
+				</entry>
+				<entry key="2">
+					<bean class="com.fr.adaming.entity.Employee">
+						<constructor-arg name="id" value="7"></constructor-arg>
+						<constructor-arg name="fullname" value="testeur2"></constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- Conversion d'un String en int : (car les value des bean n'envoi que 
+		des String) -->
+	<bean id="idGroupeAdamingBean" class="java.lang.Integer">
+		<constructor-arg name="s" value="55"></constructor-arg>
+	</bean>
+	<!-- Declaration d'un bean externe à groupeAdamingBean -->
+	<bean id="devBackend3Bean" class="com.fr.adaming.entity.Employee">
+		<property name="id" value="3"></property>
+		<property name="fullname" value="devBackend3"></property>
+	</bean>
+
+</beans>
