@@ -1,5 +1,15 @@
 public class Employee{
 	
 	private String nom;
-	private int age;
+	private String prenom;
+	private String mail;
+	private String telephone;
+	private String adresse;
+
+	/*
+	 * ctor
+	*/
+	public Employee() {
+	}
+
 }
