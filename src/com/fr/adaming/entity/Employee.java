@@ -13,7 +13,6 @@ import lombok.ToString;
 public class Employee {
 	@Getter
 	private int id;
-	@Getter
-	private String fullname;
+	
 
 }
